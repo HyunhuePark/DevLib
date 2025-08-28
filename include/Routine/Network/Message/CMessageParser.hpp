@@ -6,7 +6,7 @@
 #include "CMessageCaller.hpp"
 #include "../../Process/CWorker.hpp"
 #include "../../Serialization/CSerializer.hpp"
-#include "../../../Base/CLocker.hpp"
+#include "../../../Template/CQueueT.hpp"
 #include "../../../Base/CScopeLocker.hpp"
 
 namespace DevLib {
@@ -15,13 +15,14 @@ namespace DevLib {
 		class CMessageParser
 		{
 		public:
+			virtual ~CMessageParser() = default;
 			bool Create(WorkerType type = WorkerType::Asynchronous);
 
 			template <typename Class, typename MessageType>
-			bool RegisterMessage(uint32_t messageID, void (Class::* Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>), Class* object);
+			bool RegisterMessage(uint32_t messageID, void (Class::* Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&), Class* object);
 
 			template <typename MessageType>
-			bool RegisterMessage(uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>));
+			bool RegisterMessage(uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&));
 
 			bool ReceivedMessage(uint32_t messageID, const string_t&, uint16_t, const uint8_t* serializedData, size_t serializedDataSize, bool bDirect = false);
 			bool ReceivedMessage(uint32_t messageID, const string_t&, uint16_t, const std::shared_ptr<std::vector<uint8_t>>& serializedData, bool bDirect = false);
@@ -40,13 +41,13 @@ namespace DevLib {
 
 			using MessageQue = std::tuple<uint32_t, const string_t, uint16_t, std::shared_ptr<std::vector<uint8_t>>>;
 			std::map<uint32_t, std::shared_ptr<CAbstractMessageCaller>> messageMap;
-			CLocker<std::queue<MessageQue>> m_queueMessage;
+			Template::CQueueT<MessageQue> m_queueMessage;
 			CWorker m_workMessageProc;
 			void OnMessageProc();
 		};
 
 		template <typename Class, typename MessageType>
-		bool CMessageParser::RegisterMessage(const uint32_t messageID, void(Class::* const Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>), Class* const object)
+		bool CMessageParser::RegisterMessage(const uint32_t messageID, void(Class::* const Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&), Class* const object)
 		{
 			bool bRet = false;
 			if (messageMap.find(messageID) == messageMap.end())
@@ -58,7 +59,7 @@ namespace DevLib {
 		}
 
 		template <typename MessageType>
-		bool CMessageParser::RegisterMessage(const uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>))
+		bool CMessageParser::RegisterMessage(const uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&))
 		{
 			bool bRet = false;
 			if (messageMap.find(messageID) == messageMap.end())
@@ -72,7 +73,7 @@ namespace DevLib {
 		template <typename Message>
 		bool CMessageParser::WriteMessage(uint32_t messageID, Message& message)
 		{
-			CScopeLocker<CCriticalSection> lock(m_lockWrite);
+			CScopeLocker lock(m_lockWrite);
 			m_serializer.clear();
 			m_serializer << message;
 			return m_callbackOnWriteSerializedMessage(messageID, m_serializer.data(), m_serializer.size());

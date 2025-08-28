@@ -27,7 +27,7 @@ namespace DevLib
 		{
 		public:
 			CVideoDecoder(uint32_t nGPU = 0);
-			~CVideoDecoder();
+			virtual ~CVideoDecoder();
 
 			bool CreateDecoder(CodecType type = CodecType::H264_Intel, DevLib::Graphics::ImageType outputType = DevLib::Graphics::ImageType::IMG_BGR, ConvertType = ConvertType::CVT_BILINEAR);
 			bool CreateDecoderEx(handle_t codecParam, CodecType type = CodecType::H264_Intel, DevLib::Graphics::ImageType outputType = DevLib::Graphics::ImageType::IMG_BGR, ConvertType = ConvertType::CVT_BILINEAR);
@@ -41,7 +41,7 @@ namespace DevLib
 
 			handle_t GetCodecContext() const;
 
-			bool StartVideoLog(const std::string& filename, int32_t fps = 0);
+			bool StartVideoLog(const std::string& filename, int32_t width = 0, int32_t height = 0, int32_t fps = 0);
 			std::string GetVideoFileName();
 			uint32_t GetVideoFrameCount() const;
 			void StopVideoLog();

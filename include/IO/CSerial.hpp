@@ -36,7 +36,7 @@ namespace DevLib {
 			serialHandle m_hComm;
 			std::string m_portNmae = std::string();
 
-			uint32_t	m_baudRate;
+			uint32_t	m_baudRate{};
 			CEvent		m_eWatch;
 			CEvent		m_eRecv;
 			CEvent		m_eSend;

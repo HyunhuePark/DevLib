@@ -14,6 +14,9 @@ namespace DevLib {
 			uint32_t MessageID{};
 			uint32_t MessageLength{};
 			uint8_t Crypto{ ROUTINE_CRYPTO_UNENCRYPTED };
+			uint8_t Reserved0;
+			uint8_t Reserved1;
+			uint8_t Reserved2;
 		};
 
 		struct RoutineUDPHeader

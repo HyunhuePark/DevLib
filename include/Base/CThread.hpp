@@ -26,7 +26,8 @@ namespace DevLib {
 		uint32_t GetID() const { return m_threadID; }
 		sharedHandle GetHandle() const { return m_threadHandle; }
 		
-		static void microSleep(size_t waitMicro);
+		static void SleepMillisecond(size_t waitMillisecond);
+		static void SleepMicrosecond(size_t waitMicrosecond);
 
 	private:
 		bool BeginThread();

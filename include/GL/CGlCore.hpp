@@ -9,7 +9,7 @@
 #include "CGlCamera.hpp"
 #include "CGlLight.hpp"
 
-#define GL_MAX_LIGHT  (8)
+constexpr uint32_t GL_MAX_LIGHT = 8;
 #define BLEND_Z_ODER	// Blend Z-ordering Test
 
 namespace DevLib {
@@ -53,7 +53,6 @@ namespace DevLib {
 
 			void SetPerspective(bool bPerspective);
 			float_t SetFieldOfView(float_t angle);
-
 
 			void SetBackgroundColor(float b, float g, float r, float alpha = 1.0f) const;
 

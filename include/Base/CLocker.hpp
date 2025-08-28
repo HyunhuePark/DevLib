@@ -23,6 +23,7 @@ namespace DevLib {
 
 			return *this;
 		}
+
 		CLocker& operator=(CLocker&& other) noexcept
 		{
 			Lock();

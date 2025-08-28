@@ -69,8 +69,8 @@ namespace DevLib
 			bool TLSIsCreatedContext() const;
 			bool TLSIsCreatedSSL() const;
 
-			handle_t TLSGetContext();
-			handle_t TLSGetSSL();
+			handle_t TLSGetContext() const;
+			handle_t TLSGetSSL() const;
 
 			void TLSDestroy();
 
@@ -90,9 +90,9 @@ namespace DevLib
 			bool SetSockRecvAll(bool bRecvAll = true) const;
 			bool SetSockKeepAlive(bool bUse, uint32_t idleSec = 60, uint32_t intervalSec = 1, uint32_t intervalCount = 10) const;
 
-			bool SetTimeoutRecv(uint32_t ms);
+			bool SetTimeoutRecv(uint32_t ms) const;
 			bool SetTimeoutSend(uint32_t ms) const;
-			uint32_t GetTimeoutRecv();
+			uint32_t GetTimeoutRecv() const;
 			uint32_t GetTimeoutSend() const;
 
 		 private:

@@ -1,9 +1,10 @@
 #pragma once
 
+#include <optional>
+
 #include "CSocketReceiver.hpp"
 #include "../Base/CLocker.hpp"
 #include "../Base/DevLibCallback.hpp"
-#include <optional>
 
 namespace DevLib
 {

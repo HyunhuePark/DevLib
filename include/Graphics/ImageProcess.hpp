@@ -88,7 +88,7 @@ namespace DevLib {
 			void FlipHorizontal4(const uint8_t* src, int32_t src_width, int32_t src_height, uint8_t* dst);
 
 			void FlipVertical(uint8_t* src, int32_t src_width, int32_t src_height, int32_t nChannels);
-			void FlipVertical(uint8_t* src, int32_t src_width, int32_t src_height, int32_t nChannels, uint8_t* dst);
+			void FlipVertical(uint8_t* src, int32_t src_width, int32_t src_height, int32_t nChannels, const uint8_t* dst);
 
 			void SplitChannels(const uint8_t* src, int32_t src_width, int32_t src_height, uint8_t* ch1, uint8_t* ch2);
 			void SplitChannels(const uint8_t* src, int32_t src_width, int32_t src_height, uint8_t* ch1, uint8_t* ch2, uint8_t* ch3);

@@ -10,7 +10,7 @@ namespace DevLib {
 		CSemaphore();
 		~CSemaphore();
 
-		bool Create(int32_t maxKeyCount = 1, int32_t initKeyCount = 1, const std::string& semaName = std::string());
+		bool Create(int32_t KeyCount = 1, const std::string& semaName = std::string());
 
 		void Destroy() const;
 
@@ -18,7 +18,9 @@ namespace DevLib {
 
 		bool WaitForSemaphore(uint32_t waitMillisecond = 0xFFFFFFFF) const;
 
-		bool ReturnSemaphore(int32_t nKey = 0) const;
+		bool ReturnSemaphore(int32_t nKey = 1) const;
+
+		int32_t GetCurrentKey() const;
 
 	private:
 		sharedHandle m_handleSemaphore;

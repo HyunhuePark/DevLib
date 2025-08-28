@@ -17,6 +17,7 @@ namespace DevLib {
 		{
 		public:
 			CWorker();
+			virtual ~CWorker() = default;
 
 			template<typename Func, typename... Args>
 			bool CreateAsync(std::string workerName, Func&& _func, Args&&... _args);
@@ -51,8 +52,8 @@ namespace DevLib {
 			CWorker* m_pNextWorker{};
 
 			uint32_t m_microWorkTime{};
-			CEvent	m_eWork;
-			CEvent	m_eDoneWork;
+			CEvent	m_eAsyncWork;
+			CEvent	m_eAsyncWorkDone;
 			CThread m_threadWork;
 
 			std::unique_ptr<CAbstractCaller> m_uptrCallerWork;
@@ -82,8 +83,8 @@ namespace DevLib {
 
 				if (type == WorkerType::Asynchronous)
 				{
-					m_eWork.Create();
-					m_eDoneWork.Create(true, false);
+					m_eAsyncWork.Create();
+					m_eAsyncWorkDone.Create(true, false);
 					bRet = m_threadWork.StartThread(&CWorker::WatchDogWork, this);
 				}
 			}

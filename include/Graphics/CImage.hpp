@@ -16,8 +16,8 @@ namespace DevLib
 			CImage(int32_t width, int32_t height, ImageType type = ImageType::IMG_BGR);
 
 			bool LoadImageFile(const std::string& imgPath);
-			bool LoadImageJpegData(const uint8_t* jpegData, const int32_t size);
-			bool LoadImagePngData(const uint8_t* pngData, const int32_t size);
+			bool LoadImageJpegData(const uint8_t* jpegData, int32_t size);
+			bool LoadImagePngData(const uint8_t* pngData, int32_t size);
 			bool SaveImageFile(const std::string& imgPath);
 
 			void DrawPoint(int32_t x, int32_t y, CImageColor color);

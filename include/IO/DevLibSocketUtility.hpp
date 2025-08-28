@@ -306,7 +306,7 @@ namespace DevLib
 				timeout.tv_sec = ms / 1000;           
 				timeout.tv_usec = (ms % 1000) * 1000; 
 
-				return setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<const char*>(&timeout), sizeof(timeout)) == 0 ? true : false; // 읽기 타임아웃
+				return setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<const char*>(&timeout), sizeof(timeout)) == 0 ? true : false; // read timeout
 			}
 
 			inline bool SetTimeoutSend(const socket_t sock, uint32_t ms)
@@ -315,42 +315,26 @@ namespace DevLib
 				timeout.tv_sec = ms / 1000;
 				timeout.tv_usec = (ms % 1000) * 1000;
 
-				return setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<const char*>(&timeout), sizeof(timeout)) == 0 ? true : false; // 읽기 타임아웃
+				return setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<const char*>(&timeout), sizeof(timeout)) == 0 ? true : false; // send timeout
 			}
 
 	
 			inline uint32_t GetTimeoutRecv(const socket_t sock)
 			{
-				bool bRet = false;
 				struct timeval timeout = {};
 				socklen_t len = sizeof(timeout);
 
-				if (getsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<char*>(&timeout), &len) == 0) 
-				{
-					bRet = true;
-				}
-				else 
-				{
-					bRet = false;
-				}
+				getsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<char*>(&timeout), &len);
 
-				return 0;
+				return static_cast<uint32_t>(timeout.tv_sec * 1000 + timeout.tv_usec * 0.001);
 			}
 
 			inline uint32_t GetTimeoutSend(const socket_t sock)
 			{
-				bool bRet = false;
 				struct timeval timeout = {};
 				socklen_t len = sizeof(timeout);
 
-				if (getsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<char*>(&timeout), &len) == 0)
-				{
-					bRet = true;
-				}
-				else
-				{
-					bRet = false;
-				}
+				getsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<char*>(&timeout), &len);
 
 				return static_cast<uint32_t>(timeout.tv_sec * 1000 + timeout.tv_usec * 0.001);
 			}
@@ -555,7 +539,7 @@ namespace DevLib
 				const int ret = getaddrinfo(host.c_str(), nullptr, &hints, &result);
 				if (ret == 0) 
 				{
-					for (struct addrinfo* res = result; res != nullptr; res = res->ai_next) 
+					for (const struct addrinfo* res = result; res != nullptr; res = res->ai_next) 
 					{
 						char buff[INET6_ADDRSTRLEN];
 						const void* addr = nullptr;
@@ -583,6 +567,7 @@ namespace DevLib
 					case 10093 :
 						ip = "WSANOTINITIALISED";
 						break;
+					default: ;
 					}
 				}
 

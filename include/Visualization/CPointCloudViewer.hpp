@@ -16,6 +16,7 @@ namespace DevLib
 
 			void ShowPointCloud(CPointCloud<>& points);
 			void ShowModel(const GL::CGlModel& model);
+			void ShowModel(const std::vector<GL::CGlModel>& models);
 
 			void SetScale(float scale);
 

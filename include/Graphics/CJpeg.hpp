@@ -6,26 +6,33 @@ namespace DevLib
 {
 	namespace Graphics
 	{
+		enum class JPEGSubSampling
+		{
+			SUBSAMP_420,
+			SUBSAMP_422,
+			SUBSAMP_444
+		};
+
 		class CJpeg
 		{
 		public:
 			CJpeg();
 			CJpeg(const CJpeg& src);
-			CJpeg(const uint8_t* jpegData, const int32_t size);
+			CJpeg(const uint8_t* jpegData, int32_t size);
 			CJpeg(const std::string &imgPath);
 			CJpeg(DevLib::Graphics::CImageObject& img, uint32_t quality = 90);
 			~CJpeg();
 
 			bool LoadImageFile(const std::string& imgPath);
-			bool LoadImageMem(const uint8_t* jpegData, const int32_t size);
+			bool LoadImageMem(const uint8_t* jpegData, int32_t size);
 			bool SaveImageFile(const std::string& imgPath) const;
 
-			bool FromImage(CImageObject& img, uint32_t quality = 90);
+			bool FromImage(CImageObject& img, uint32_t quality = 90, JPEGSubSampling samp = JPEGSubSampling::SUBSAMP_422);
 			bool ToImage(CImageObject& img) const;
 
-			uint32_t GetWidth() const;
-			uint32_t GetHeight() const;
-			uint32_t GetChannels() const;
+			int32_t GetWidth() const;
+			int32_t GetHeight() const;
+			int32_t GetChannels() const;
 			uint32_t GetSize() const;
 
 			std::vector<uint8_t>& JpegData();
@@ -33,14 +40,10 @@ namespace DevLib
 			// operator
 			CJpeg& operator=(const CJpeg& src);
 		private:
-			uint32_t m_width{};
-			uint32_t m_height{};
-			uint32_t m_channels{};
+			int32_t m_width{};
+			int32_t m_height{};
+			int32_t m_channels{};
 			std::vector<uint8_t> m_jpeg;
-
-			static void JpegInit(handle_t jpegInfo);
-			static void JpegTerm(handle_t jpegInfo);
-			static uint8_t JpegEmptyMemory(handle_t jpegInfo);
 		};
 	}
 }

@@ -6,12 +6,12 @@
 #include "../../Base/CVariadicCaller.hpp"
 #include "../../IO/CSocketReceiver.hpp"
 #include "../../Base/CEvent.hpp"
-#include "../Template/CSingletonT.hpp"
+#include "../../Template/CSingletonT.hpp"
 
 namespace DevLib {
 	namespace Routine
 	{
-		class CProcess final : public CSingletonT<CProcess>
+		class CProcess final : public Template::CSingletonT<CProcess>
 		{
 		public:
 			CProcess() = default;

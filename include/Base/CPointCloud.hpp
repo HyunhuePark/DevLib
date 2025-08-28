@@ -45,9 +45,9 @@ namespace DevLib
 			m_vPoints.insert(position, first, last);
 		}
 
-		iterator begin() noexcept { return (m_vPoints.begin()); }
+		iterator begin() noexcept { return m_vPoints.begin(); }
 
-		iterator end() noexcept { return (m_vPoints.end()); }
+		iterator end() noexcept { return m_vPoints.end(); }
 
 		Type& operator[](const int _idx)
 		{

@@ -27,7 +27,7 @@ namespace DevLib {
 
 		int32_t MilliSecond() const { return m_time.tm_ms; }
 
-		int32_t MircroSecond() const { return m_time.tm_us; }
+		int32_t MicroSecond() const { return m_time.tm_us; }
 
 		int32_t YearDay() const { return m_time.tm_yday; }
 
@@ -41,8 +41,9 @@ namespace DevLib {
 		CTime operator-(uint64_t sec) const;
 		CTime operator+(uint64_t sec) const;
 
-		static CTime GetCurrentTime();
-		static double GetCurrentTimestamp();
+		static CTime MakeCurrentTime();
+		static double MakeCurrentTimestamp();
+
 		struct sTIME {
 			int32_t tm_sec;     /* seconds after the minute - [0,59] */
 			int32_t tm_min;     /* minutes after the hour - [0,59] */

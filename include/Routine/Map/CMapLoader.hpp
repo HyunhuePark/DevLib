@@ -15,7 +15,7 @@ namespace DevLib {
 		{
 		public:
 			CMapLoader();
-			~CMapLoader();
+			virtual ~CMapLoader();
 
 			CMapLoader(const CMapLoader&) = delete;
 			CMapLoader& operator=(const CMapLoader&) = delete;

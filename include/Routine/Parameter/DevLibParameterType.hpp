@@ -15,7 +15,7 @@ namespace DevLib {
 			virtual ~CParamType() = default;
 
 			virtual std::string ToStringValue() { return {}; }
-			virtual std::string SetValue(std::string) { return  {}; }
+			virtual std::string SetValue(std::string v) { return  {}; }
 
 			std::string ToStringType()
 			{

@@ -14,6 +14,7 @@ namespace DevLib {
 		{
 		public:
 			CParameterServer();
+			virtual ~CParameterServer() = default;
 
 			bool ServerOpen(uint16_t port);
 

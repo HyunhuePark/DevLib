@@ -8,9 +8,6 @@
 #pragma warning (push)
 #pragma warning (disable : 4819)
 #endif
-/**
- * \brief Eigen3 MPL2
- */
 
 #ifdef Success
 #undef Success
@@ -36,10 +33,10 @@ namespace DevLib
 	using CPoint4Df = Eigen::Vector4f;
 	using CPoint4Dd = Eigen::Vector4d;
 
-	template<typename Type> inline Type Rotation2D(const Type& point, double angle)
+	template<typename Type> Type Rotation2D(const Type& point, double angle)
 	{
 		constexpr double pi = 3.141592653589793;
-		double radian = angle * pi / 180.0;
+		const double radian = angle * pi / 180.0;
 
 		Eigen::Matrix<typename Type::Scalar, 2, 2> rotationMatrix;
 		rotationMatrix << std::cos(radian), -std::sin(radian), std::sin(radian), std::cos(radian);
@@ -47,13 +44,14 @@ namespace DevLib
 		return rotationMatrix * point;
 	}
 
-	template<typename Type> inline Type Rotation3D(const Type& point, const Eigen::Vector3d& axis, double angle)
+	template<typename Scalar> Eigen::Matrix<Scalar, 3, 1> Rotation3D(const Eigen::Matrix<Scalar, 3, 1>& point, const Eigen::Matrix<Scalar, 3, 1>& axis, Scalar angle)
 	{
 		constexpr double pi = 3.141592653589793;
-		double radian = angle * pi / 180.0;
+		const Scalar radian = angle * pi / 180.0;
 
-		Eigen::AngleAxisd rotation(radian, axis.normalized());
+		Eigen::AngleAxis<Scalar> rotation(radian, axis.normalized());
 
 		return rotation * point;
 	}
+
 }

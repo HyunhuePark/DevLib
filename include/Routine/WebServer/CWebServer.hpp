@@ -15,9 +15,10 @@ namespace DevLib {
 			{
 			public:
 				CWebServer();
+				virtual ~CWebServer() = default;
 
-				bool HTTPOpen(uint16_t port, const std::string& bindIP = "0.0.0.0", uint32_t listenCount = 128);
-				bool HTTPSOpen(uint16_t port, const std::string& CertificateFile = "./server.crt", const std::string& PrivateKeyFile = "./server.key", const std::string& bindIP = "0.0.0.0", uint32_t listenCount = 128);
+				bool HTTPOpen(uint16_t port, const std::string& bindIP = {}, uint32_t listenCount = 128);
+				bool HTTPSOpen(uint16_t port, const std::string& CertificateFile = "./server.crt", const std::string& PrivateKeyFile = "./server.key", const std::string& bindIP = {}, uint32_t listenCount = 128);
 
 				EnableCallback(Connection, const std::string& ip, uint16_t port)
 				EnableCallback(DisConnection, const std::string& ip, uint16_t port)

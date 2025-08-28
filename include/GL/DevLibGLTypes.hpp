@@ -3,7 +3,6 @@
 #if defined(_MSC_VER)
 #include <Windows.h>
 #include <gl/GL.h>
-#include <gl/GLU.h>
 
 #pragma comment(lib, "gdi32.lib")
 #pragma comment(lib, "user32.lib")

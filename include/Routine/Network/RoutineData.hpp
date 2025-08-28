@@ -21,28 +21,6 @@ using dataName = class dataName : public DevLib::Routine::CAbstractSerialization
 {\
 	public:\
 	
-#if defined(_MSC_VER)
-
-#define EndRoutineData( dataName )\
-	\
-	EnableSmartPointer(dataName)\
-	\
-	static friend DevLib::Routine::CDeSerializer& operator>>(DevLib::Routine::CDeSerializer& deserializer, dataName& obj)\
-	{\
-		obj.DeSerialization(deserializer);\
-		return deserializer;\
-	}\
-	\
-	DevLib::Routine::CSerializer& operator >> (DevLib::Routine::CSerializer& m_serializer)\
-	{\
-		Serialization(m_serializer);\
-		return m_serializer;\
-	}\
-\
-};\
-\
-
-#elif defined(__linux__) // Linux
 
 #define EndRoutineData( dataName )\
 	\
@@ -62,9 +40,6 @@ using dataName = class dataName : public DevLib::Routine::CAbstractSerialization
 \
 };\
 \
-
-#endif
-
 
 #define BeginBitField8( dataName ) \
 	struct struct_##dataName : DevLib::Routine::StBitField8_t\

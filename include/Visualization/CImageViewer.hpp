@@ -8,11 +8,11 @@ namespace DevLib
 {
 	namespace Visualization
 	{
-		class CImageViewer : public GUI::CDevLibWindow
+		class CImageViewer final : public GUI::CDevLibWindow
 		{
 		public:
 			CImageViewer(std::string title = std::string("RoutineImageViewer"));
-			~CImageViewer();
+			~CImageViewer() override;
 
 			void ShowImage(const Graphics::CImageObject& image);
 			void ShowImage(const std::string& image_path);

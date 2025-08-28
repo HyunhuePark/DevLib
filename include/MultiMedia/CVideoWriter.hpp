@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "../Base/DevLibTypes.hpp"
 #include "../Base/CCriticalSection.hpp"
 #include "DevLibMultimediaTypes.hpp"

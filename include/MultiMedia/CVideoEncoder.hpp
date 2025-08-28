@@ -12,9 +12,9 @@ namespace DevLib
 		{
 		public:
 			CVideoEncoder(uint32_t nGPU = 0);
-			~CVideoEncoder();
-			bool CreateEncoder(int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 10, CodecType type = CodecType::H264_Intel, Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR);
-			bool CreateEncoderEx(int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 10, const std::string& codec_name = "h264_qsv", Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR);
+			virtual ~CVideoEncoder();
+			bool CreateEncoder(int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 10, CodecType type = CodecType::H264_Intel, Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR, CodecPreset preset = CodecPreset::Medium, CodecProfile profile = CodecProfile::Main);
+			bool CreateEncoderEx(int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 10, const std::string& codec_name = "h264_qsv", Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR, CodecPreset preset = CodecPreset::Medium, CodecProfile profile = CodecProfile::Main);
 			void Destroy();
 			bool IsCreated() const;
 

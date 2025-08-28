@@ -13,12 +13,13 @@ namespace DevLib {
 		{
 		public:
 			CRoutineServer();
+			virtual ~CRoutineServer() = default;
 
 			bool CreateServer(uint16_t port, const std::string& bind = std::string(), bool bBlockMode = true, const std::vector<uint8_t>& key = std::vector<uint8_t>());
 			void CloseServer();
 
-			template <typename MessageType> bool RegisterMessage(uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>));
-			template <typename Class, typename MessageType> bool RegisterMessage(uint32_t messageID, void(Class::* Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>), Class* object);
+			template <typename MessageType> bool RegisterMessage(uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&));
+			template <typename Class, typename MessageType> bool RegisterMessage(uint32_t messageID, void(Class::* Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&), Class* object);
 
 			template <typename MessageType>
 			void WriteMessage(uint32_t messageID, MessageType& pData, bool bTcp = true);
@@ -65,14 +66,13 @@ namespace DevLib {
 
 
 		template <typename MessageType>
-		bool CRoutineServer::RegisterMessage(const uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>))
+		bool CRoutineServer::RegisterMessage(const uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&))
 		{
 			return m_messageParser.RegisterMessage(messageID, Func);
 		}
 
 		template <typename Class, typename MessageType>
-		bool CRoutineServer::RegisterMessage(const uint32_t messageID, void(Class::* const Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>),
-			Class* const object)
+		bool CRoutineServer::RegisterMessage(const uint32_t messageID, void(Class::* const Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&), Class* const object)
 		{
 			return m_messageParser.RegisterMessage(messageID, Func, object);
 		}

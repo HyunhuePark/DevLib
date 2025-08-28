@@ -16,11 +16,11 @@ namespace DevLib
 			bool AddUser(const std::string& userName, const std::string& password) const;
 			bool RemoveUser(const std::string& userName) const;
 
-			bool CreateStreamer(uint16_t serverPort, int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 15, CodecType type = CodecType::H264_Intel, Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR, const string_t& optURL = string_t());
-			bool CreateStreamerEx(uint16_t serverPort, int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 15, const std::string& strType = "h264_qsv", Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR, const string_t& optURL = string_t());
+			bool CreateStreamer(uint16_t serverPort, int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 15, CodecType type = CodecType::H264_Intel, Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR, CodecPreset preset = CodecPreset::Medium, CodecProfile profile = CodecProfile::Main, const string_t& optURL = string_t() );
+			bool CreateStreamerEx(uint16_t serverPort, int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 15, const std::string& strType = "h264_qsv", Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR, CodecPreset preset = CodecPreset::Medium, CodecProfile profile = CodecProfile::Main, const string_t& optURL = string_t() );
 
-			bool SwitchVideoSource(int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 15, CodecType type = CodecType::H264_Intel, Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR);
-			bool SwitchVideoSourceEx(int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 15, const std::string& strType = "h264_qsv", Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR);
+			bool SwitchVideoSource(int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 15, CodecType type = CodecType::H264_Intel, Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR, CodecPreset preset = CodecPreset::Medium, CodecProfile profile = CodecProfile::Main);
+			bool SwitchVideoSourceEx(int32_t width, int32_t height, int64_t bitRateKB = 400, int32_t frameRate = 30, int32_t gopSize = 15, const std::string& strType = "h264_qsv", Graphics::ImageType inputType = Graphics::ImageType::IMG_BGR, CodecPreset preset = CodecPreset::Medium, CodecProfile profile = CodecProfile::Main);
 
 			void Destroy();
 			void StreamImage(const Graphics::CImageObject& src, uint32_t sec = 0, uint32_t usec = 0);

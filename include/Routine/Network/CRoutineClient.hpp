@@ -3,6 +3,7 @@
 #include "../../IO/CTcpClient.hpp"
 #include "../Serialization/CSerializer.hpp"
 #include "Message/CMessageParser.hpp"
+#include "../../Base/CLocker.hpp"
 
 namespace DevLib {
 	namespace Routine
@@ -11,12 +12,13 @@ namespace DevLib {
 		{
 		public:
 			CRoutineClient();
+			virtual ~CRoutineClient() = default;
 
 			bool CreateClient(const std::string& ip, uint16_t port, const std::vector<uint8_t>& key = std::vector<uint8_t>());
 			void CloseClient();
 
-			template <typename MessageType> bool RegisterMessage(uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>));
-			template <typename Class, typename MessageType> bool RegisterMessage(uint32_t messageID, void(Class::* Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>), Class* object);
+			template <typename MessageType> bool RegisterMessage(uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&));
+			template <typename Class, typename MessageType> bool RegisterMessage(uint32_t messageID, void(Class::* Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&), Class* object);
 
 			template <typename MessageType>
 			void WriteMessage(uint32_t messageID, MessageType& pData, bool bTcp = true);
@@ -67,13 +69,13 @@ namespace DevLib {
 
 
 		template <typename MessageType>
-		bool CRoutineClient::RegisterMessage(const uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>))
+		bool CRoutineClient::RegisterMessage(const uint32_t messageID, void(*Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&))
 		{
 			return m_messageParser.RegisterMessage(messageID, Func);
 		}
 
 		template <typename Class, typename MessageType>
-		bool CRoutineClient::RegisterMessage(const uint32_t messageID, void(Class::* const Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>), Class* const object)
+		bool CRoutineClient::RegisterMessage(const uint32_t messageID, void(Class::* const Func)(const string_t&, uint16_t, const std::shared_ptr<MessageType>&), Class* const object)
 		{
 			return m_messageParser.RegisterMessage(messageID, Func, object);
 		}

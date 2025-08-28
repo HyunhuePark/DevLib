@@ -14,6 +14,7 @@ namespace DevLib {
 		{
 		public:
 			CParameterClient();
+			virtual ~CParameterClient() = default;
 
 			bool CreateClient(const std::string& serverIP, uint16_t serverPort);
 			bool RequestParameter();
@@ -26,9 +27,8 @@ namespace DevLib {
 			template <typename Type>
 			bool SetValue(std::string GroupName, std::string Name, Type Value);
 
-
 			EnableCallback(Connection, const std::string& ip, uint16_t port)
-				EnableCallback(DisConnection, const std::string& ip, uint16_t port)
+			EnableCallback(DisConnection, const std::string& ip, uint16_t port)
 
 		private:
 			IO::CTcpClient m_client;

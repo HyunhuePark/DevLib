@@ -20,8 +20,8 @@ namespace DevLib {
 
 			std::string GetHTML404();
 
-			std::string Base64Encode(const ::std::string &bindata);
-			std::string Base64Decode(const ::std::string &ascdata);
+			std::string Base64Encode(const ::std::string &bindData);
+			std::string Base64Decode(const ::std::string &ascData);
 
 			// Token
 			std::string GeneratorToken(const std::string& issuer, const std::string& userName, uint64_t secondValid);

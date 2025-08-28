@@ -25,6 +25,7 @@ namespace DevLib
 			GlMaterialProp& Emission();
 			float_t& Shininess();
 
+			bool LoadImageFile(const std::string& imgPath);
 			void SetTexture(const Graphics::CImage& texture);
 
 			void SetAmbient(const GlMaterialProp& ambient);

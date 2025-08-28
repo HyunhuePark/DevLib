@@ -13,12 +13,12 @@ namespace DevLib
 		{
 		public:
 			CRTSPServer(std::string sessionName = std::string("DevLib RTSP Streamer ( With Live555! )"), bool EnableAuthentication = false);
-			~CRTSPServer();
+			virtual ~CRTSPServer();
 
 			bool AddUser(const std::string& userName, const std::string& password) const;
 			bool RemoveUser(const std::string& userName) const;
 
-			bool CreateRTSPServer(uint16_t serverPort, MediaType type = MediaType::H265, const string_t& optURL = string_t());
+			bool CreateRTSPServer(uint16_t serverPort, MediaType type = MediaType::H264, const string_t& optURL = string_t());
 			void Destroy();
 			void StreamNal(const uint8_t* pNals, uint32_t size, uint32_t sec = 0, uint32_t usec = 0) const;
 

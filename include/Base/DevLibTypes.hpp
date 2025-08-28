@@ -3,7 +3,6 @@
 #include <memory>
 #include <cstdio>
 #include <string>
-#include <vector>
 
 #if defined(_MSC_VER)
 #define _WINSOCKAPI_ 
@@ -138,7 +137,9 @@ SharedPtr makeShared() const { return std::make_shared<dataName>(*this); }\
 
 	*/
 
+#ifndef UNUSED
 #define UNUSED(x) ((void)(x))
+#endif
 
 }
 

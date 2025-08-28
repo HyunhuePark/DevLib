@@ -17,7 +17,7 @@ namespace DevLib
 		{
 		public:
 			CRTSPClient(uint32_t bufferSize = 100);
-			~CRTSPClient();
+			virtual ~CRTSPClient();
 
 			bool CreateRTSPClient(const std::string& rtspURL, uint32_t msRTPTimeout = 3000, DevLib::MultiMedia::MediaType type = DevLib::MultiMedia::MediaType::H264, bool bUseOverTCP = false);
 			bool IsCreated() const;
@@ -79,8 +79,8 @@ namespace DevLib
 			void OnClose(const char_t* sessionName);
 			void OnConnection(const char_t* sessionName) const;
 
-			DevLib::MultiMedia::MediaType mediaType;
-			inline DevLib::MultiMedia::MediaType GetMediaType() { return mediaType; }
+			MediaType mediaType;
+			MediaType GetMediaType() const { return mediaType; }
 
 		};
 

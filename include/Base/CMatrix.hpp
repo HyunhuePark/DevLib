@@ -6,9 +6,6 @@
 #pragma warning (push)
 #pragma warning (disable : 4819)
 #endif
-/**
- * \brief Eigen3 MPL2 
- */
 
 #ifdef Success
 #undef Success

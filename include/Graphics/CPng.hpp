@@ -11,13 +11,13 @@ namespace DevLib
 		public:
 			CPng();
 			CPng(const CPng& src);
-			CPng(const uint8_t* pngData, const uint32_t size);
+			CPng(const uint8_t* pngData, uint32_t size);
 			CPng(const std::string& imgPath);
 			CPng(const DevLib::Graphics::CImageObject& img);
 			~CPng();
 
 			bool LoadImageFile(const std::string& imgPath);
-			bool LoadImageMem(const uint8_t* pngData, const uint32_t size);
+			bool LoadImageMem(const uint8_t* pngData, uint32_t size);
 			bool SaveImageFile(const std::string& imgPath) const;
 
 			bool FromImage(const CImageObject& img);

@@ -10,7 +10,7 @@ namespace DevLib
 		{
 		public:
 			CVideoLoader();
-			~CVideoLoader();
+			virtual ~CVideoLoader();
 
 			bool OpenVideo(const std::string& filename);
 			void CloseVideo();

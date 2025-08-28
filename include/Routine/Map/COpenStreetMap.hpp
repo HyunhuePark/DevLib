@@ -15,7 +15,7 @@ namespace DevLib {
 		{
 		public:
 			COpenStreetMap();
-			~COpenStreetMap();
+			virtual ~COpenStreetMap();
 
 			COpenStreetMap(const COpenStreetMap&) = delete;
 			COpenStreetMap& operator=(const COpenStreetMap&) = delete;

@@ -39,9 +39,28 @@ namespace DevLib
 			Unknown
 		};
 
+		enum class CodecPreset
+		{
+			UltraFast,
+			VeryFast,
+			Fast,
+			Medium,
+			Slow,
+			VerySlow,
+			Placebo
+		};
+
+		enum class CodecProfile
+		{
+			Baseline,
+			Main,
+			High,
+			High10
+		};
+
 		inline MediaType CodecTypeToMediaType(CodecType codec)
 		{
-			MediaType mediaType = MediaType::Unknown;
+			MediaType mediaType;
 			switch (codec)
 			{
 			case CodecType::H264_AMD:
@@ -182,7 +201,7 @@ namespace DevLib
 			return MediaType::Unknown;
 		}
 
-		inline CodecType CodecTypeToString(std::string codec_name)
+		inline CodecType CodecTypeToString(const std::string& codec_name)
 		{
 			if (codec_name == "h264_amf") return CodecType::H264_AMD;
 			if (codec_name == "h264_qsv") return  CodecType::H264_Intel;

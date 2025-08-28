@@ -10,7 +10,7 @@ namespace DevLib {
 
 		namespace ImageUtility 
 		{
-			void DrawBitmapToDC(void* Target, const CImageObject& image, bool bStetch = true);
+			void DrawBitmapToDC(void* Target, const CImageObject& image, bool bStretch = true);
 			void DrawDCToBitmap(void* Source, CImageObject& image);
 
 			bool SaveImageFile(CImageObject& image, const std::string& szFileName);
@@ -20,12 +20,12 @@ namespace DevLib {
 			bool SaveBitmapFile(CImageObject& image, const std::string& szFileName);
 
 			bool LoadJPEGFile(CImageObject& image, const std::string& szFileName);
-			bool LoadJPEGData(CImageObject& image, const uint8_t* jpegData, const int32_t size);
+			bool LoadJPEGData(CImageObject& image, const uint8_t* jpegData, int32_t size);
 			bool SaveJPEGFile(CImageObject& image, const std::string& szFileName, int q = 80);
 
 			bool LoadPNGFile(CImageObject& image, const std::string& szFileName);
-			bool LoadPNGData(CImageObject& image, const uint8_t* pngData, const int32_t size);
-			bool SavePNGFile(CImageObject& image, const std::string& szFileName);
+			bool LoadPNGData(CImageObject& image, const uint8_t* pngData, int32_t size);
+			bool SavePNGFile(const CImageObject& image, const std::string& szFileName);
 
 			//////////////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////////
