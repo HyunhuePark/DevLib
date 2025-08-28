@@ -1,0 +1,54 @@
+# - Config file for the DevLib package
+# It defines the following variables
+#  DevLib_INCLUDE_DIR - include directories for DevLib
+#  DevLib_LIBRARIES    - libraries to link against
+
+@PACKAGE_INIT@ 
+
+# GCC 주요 버전 추출
+execute_process(
+    COMMAND ${CMAKE_CXX_COMPILER} -dumpversion
+    OUTPUT_VARIABLE GCC_VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+if(GCC_VERSION MATCHES "^[0-9]+")
+  string(REGEX MATCH "^[0-9]+" GCC_MAJOR_VERSION ${GCC_VERSION})
+else()
+  message(FATAL_ERROR "Invalid GCC version format: ${GCC_VERSION}")
+endif()
+
+
+# Compute paths
+set_and_check(DevLib_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
+
+# Our library dependencies 
+set_and_check(DevLib_LIB_DIR ${CMAKE_CURRENT_LIST_DIR}/lib)
+
+set(DEVLIB )
+IF(${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64") # for desktop
+  set(DEVLIB ${DevLib_LIB_DIR}/libDevLib_gcc${GCC_VERSION}.a)
+ELSEIF(${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64") # for aarch64
+  set(DEVLIB ${DevLib_LIB_DIR}/libDevLib_aarch64_gcc${GCC_VERSION}.a)
+ENDIF()
+
+set(DevLib_LIBRARIES 
+  ${DEVLIB}
+  
+  # ffmpeg
+  avcodec
+  avformat 
+  avutil 
+  swscale
+
+  # system dependencies
+  X11
+  GL
+  GLU
+  pthread
+  rt
+
+  # crypto
+  dl
+)
+
